@@ -1,0 +1,42 @@
+.main {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 90 px 0 90 px 0;
+    background-color:rgb(223 223 223);
+}
+
+.submain {
+    font-family: 'SansSerif BoldOblique';
+    display: flex;
+    justify-content: center;
+    display: flex;
+    height: 550 px;
+    width: 35%;
+    box-shadow: 11px 12px 13px 12px rgb(207,207,207);
+    padding-top: 30px;
+    border-radius: 60px;
+    background-color: rgb(255 255 255)
+}
+
+.input{
+    width:300px;
+    height:50px;
+    border-radius: 60px;
+    box-shadow: inset 0px 0px 25px 0 px #888;
+    border: none;
+    background-color: #fff;
+}
+
+
+
+
+.registration-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
