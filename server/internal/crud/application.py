@@ -32,7 +32,7 @@ async def _get_all_application(session: AsyncSession):
     return result.scalars().all()
 
 
-async def _get_all_application(id: UUID, session: AsyncSession):
+async def _get_one_application(id: UUID, session: AsyncSession):
     stmt = select(Application).where(Application.id == id)
     result = await session.execute(stmt)
     return result.scalars().one()
