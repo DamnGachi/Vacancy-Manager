@@ -1,5 +1,5 @@
 from uuid import UUID
-from sqlalchemy import insert
+from sqlalchemy import insert,delete
 from internal.db.models import Application
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,5 +13,11 @@ async def _create_application(application, session: AsyncSession):
     return query
 
 
-async def remove_cv(id: UUID):
-    pass
+async def remove_cv(id: UUID,session: AsyncSession):
+    query = delete(Application).where(Application.id == id)
+    session.execute(query)
+    await session.commit()
+    await session.refresh(query)
+    return query
+
+
