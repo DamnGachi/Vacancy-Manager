@@ -1,5 +1,6 @@
-from internal.utils import Base
-from sqlalchemy import JSON, Boolean, Column, ForeignKey, Integer, String, Table
+import uuid
+from internal.utils.base import Base
+from sqlalchemy import JSON, UUID, Boolean, Column, ForeignKey, Integer, String, Table
 
 role = Table(
     "role",
@@ -11,12 +12,19 @@ role = Table(
 
 
 class User(Base):
-    user_id = Column(Integer, primary_key=True)
+    __tablename__ = 'users'
+    user_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    email = Column(String(50), nullable=False, unique=True)
+    hashed_password: str = Column(String(length=1024), nullable=False)
+    city = Column(String(50), nullable=False)
+    role_id = Column(Integer, ForeignKey(role.c.id))
+
+
+class Application(Base):
+    __tablename__ = 'applications'
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     first_name = Column(String(50), nullable=False)  # имя
     second_name = Column(String(50), nullable=False)  # фамилия
     surname = Column(String(50), nullable=False)  # отчество
-    email = Column(String(50), nullable=False, unique=True)
-    password = Column(String(50), nullable=False)
-    city = Column(String(50), nullable=False)
     cv_file = Column(String(50), nullable=False)
-    role_id = Column(Integer, ForeignKey(role.c.id))
+    is_active = Column(Boolean, default=True)

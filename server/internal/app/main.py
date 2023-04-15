@@ -12,11 +12,6 @@ def create_app() -> FastAPI:
         description=settings.DESCRIPTION,
         version=settings.VERSION,
         terms_of_service="http://www.fastapi.org",
-        contact=dict(
-            name="Telegram",
-            url="https://www.telegram.org/@Holucrap",
-            email="maijor18@mail.ru",
-        ),
         license_info=dict(
             name="Apache 2.0",
             url="https://www.apache.org/licenses/LICENSE-2.0.html"
@@ -37,7 +32,6 @@ def create_app() -> FastAPI:
             allow_methods=["*"],
             allow_headers=["*"],
         )
-    # app.mount('/client/src/assets/', StaticFiles(directory='/client/src/assets/'), name='assets')
     app.include_router(api_router, prefix=settings.API)
 
     return app

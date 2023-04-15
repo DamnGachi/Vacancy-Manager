@@ -1,4 +1,4 @@
-from internal.db.models import User
+from internal.db.models import User, role, Application
 import asyncio
 import sys
 from logging.config import fileConfig
@@ -10,8 +10,8 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 
 from internal.utils.base import Base
 
-BASE_DIR = Path(__file__).resolve().parents[1]
-sys.path.append(str(BASE_DIR))
+# BASE_DIR = Path(__file__).resolve().parents[1]
+# sys.path.append(str(BASE_DIR))
 
 
 # this is the Alembic Config object, which provides
