@@ -18,6 +18,7 @@ class User(Base):
     hashed_password: str = Column(String(length=1024), nullable=False)
     city = Column(String(50), nullable=False)
     role_id = Column(Integer, ForeignKey(role.c.id))
+    rating = Column(Integer, default=0)
 
 
 class Application(Base):
@@ -27,4 +28,6 @@ class Application(Base):
     second_name = Column(String(50), nullable=False)  # фамилия
     surname = Column(String(50), nullable=False)  # отчество
     cv_file = Column(String(50), nullable=False)
+    login_telegram = Column(String(50), nullable=False, unique=True)
     is_active = Column(Boolean, default=True)
+    is_verified = Column(Boolean, default=False)

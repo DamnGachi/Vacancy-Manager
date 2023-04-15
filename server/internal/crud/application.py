@@ -4,14 +4,13 @@ from internal.db.models import Application
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
-
-
-async def _create_application(application: dict, session: AsyncSession):
-    query = insert(Application).values(application.first_name, application.last_name, application.email,)
+async def _create_application(application, session: AsyncSession):
+    query = Application(first_name=application.first_name, second_name=application.second_name,
+                        surname=application.surname, login_telegram=application.login_telegram, cv_file=application.cv_file)
     session.add(query)
-    session.commit()
-    session.refresh(query)
-    return {"id": query.id}
+    await session.commit()
+    await session.refresh(query)
+    return query
 
 
 async def remove_cv(id: UUID):

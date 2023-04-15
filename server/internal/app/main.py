@@ -23,6 +23,7 @@ def create_app() -> FastAPI:
     @app.get("/", tags=['Welcome'])
     async def welcome():
         return {"message": "Welcome"}
+    
     if settings.BACKEND_CORS_ORIGINS:
         app.add_middleware(
             CORSMiddleware,
