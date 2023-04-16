@@ -29,6 +29,7 @@ class User(Base):
     city = Column(String(50), nullable=False)
     role_id = Column(Integer, ForeignKey(role.c.id))
     rating = Column(Integer, default=0)
+    telegram_id = Column(Integer, nullable=True, unique=True)
 
 
 class Application(Base):
@@ -44,9 +45,10 @@ class Application(Base):
     is_verified = Column(Boolean, default=False)
     comment = Column(Text, nullable=True, default="")
 
+
 class Vacancy(Base):
     __tablename__ = "Vacancy"
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = Column(String(50), nullable=False)
     description = Column(Text, nullable=False)
-    gross= Column(Integer, nullable=True)
+    gross = Column(Integer, nullable=True)

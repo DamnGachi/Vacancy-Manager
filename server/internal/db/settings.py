@@ -14,6 +14,10 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
+    # ... The rest of our FastAPI settings
+
+    BASE_URL = "http://127.0.0.1:8000"
+    USE_NGROK = os.environ.get("USE_NGROK") == "True"
 
     API: str = "/api"
     RPC: str = "/rpc"
