@@ -1,5 +1,5 @@
 from internal.api import api_router
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from internal.db import settings
 from sqlalchemy.exc import DBAPIError, NoResultFound
@@ -8,7 +8,7 @@ import sys
 
 from fastapi import FastAPI
 from fastapi.logger import logger
-
+from fastapi.responses import HTMLResponse
 from internal.db import settings
 
 
@@ -49,9 +49,14 @@ def create_app() -> FastAPI:
     #     init_webhooks(public_url)
 
 # ... Initialize routers and the rest of our app
-    @app.get("/", tags=['Welcome'])
-    async def welcome():
-        return {"message": "Welcome"}
+    from fastapi.templating import Jinja2Templates
+    templates = Jinja2Templates(directory="templates")
+
+
+    @app.get("/")
+    async def read_item(request: Request):
+        context = {"request": request}
+        return templates.TemplateResponse("item.html", context)
 
     if settings.BACKEND_CORS_ORIGINS:
         app.add_middleware(
