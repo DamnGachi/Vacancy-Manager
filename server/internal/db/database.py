@@ -1,9 +1,10 @@
+from internal.utils.base import Base
 from internal.db import settings
-from contextlib import asynccontextmanager
 from typing import Any, AsyncContextManager, AsyncGenerator, Callable
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
-from internal.utils.base import Base
 
+from sqlalchemy import create_engine, orm
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
 AsyncSessionGenerator = AsyncGenerator[AsyncSession, None]
 
@@ -31,9 +32,22 @@ factory = async_sessionmaker(
     expire_on_commit=False,
 )
 
+
 async def get_session() -> AsyncGenerator[AsyncSession, None]:  # noqa: WPS430, WPS442
     async with factory() as session:
         yield session
 
+
+def sync_session(url: str) -> orm.scoped_session:
+    engine = create_engine(
+        url, pool_pre_ping=True, future=True,
+    )
+    factory = orm.sessionmaker(
+        engine, autoflush=False, expire_on_commit=False,
+    )
+    return orm.scoped_session(factory)
+
+
 override_session = get_session()
 context_session = get_session()
+current_session = sync_session(settings.DATABASE_URI.replace('+asyncpg', ''))

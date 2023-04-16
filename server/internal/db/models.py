@@ -47,7 +47,7 @@ class Application(Base):
 
 
 class Vacancy(Base):
-    __tablename__ = "Vacancy"
+    __tablename__ = "vacancy"
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     title = Column(String(50), nullable=False)
     description = Column(Text, nullable=False)
