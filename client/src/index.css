@@ -1,35 +1,38 @@
+
 .main {
+    padding-top: 5%;
+    padding-bottom: 5%;
     text-align: center;
+    display:flex;
     justify-content: center;
-    display: flex;
-    padding: 90 px 0 90 px 0;
-    background-color:rgb(223 223 223);
+    align-items: center;
+/*    background-color:rgb(223 223 223);*/
 }
 
 .submain {
-    font-family: 'SansSerif BoldOblique';
     display: flex;
     justify-content: center;
-    display: flex;
-    height: 550 px;
+    align-items: center;
     width: 35%;
     box-shadow: 11px 12px 13px 12px rgb(207,207,207);
-    padding-top: 30px;
+    padding: 30px;
     border-radius: 60px;
     background-color: rgb(255 255 255)
 }
 
-.input{
-    width:300px;
-    height:50px;
+input {
+    font-family: 'Times New Roman', Times, serif;
+    display: block;
     border-radius: 60px;
     box-shadow: inset 0px 0px 25px 0 px #888;
-    border: none;
+    margin: auto;
     background-color: #fff;
 }
 
-
-
+label {
+    display:block;
+    margin: 7px;
+}
 
 .registration-form input[type="submit"] {
     background-color: #4CAF50;
@@ -39,4 +42,29 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+h1 {font-size: 1.3em}
+
+@media screen and (max-width: 600px){
+    .main{
+padding-top:30% ;
+padding-bottom: 15%;
+
+
+    }
+
+    .submain {
+        display:flex;
+        flex-flow: column;
+        height: auto;
+        width: auto;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+
+
+    
 }

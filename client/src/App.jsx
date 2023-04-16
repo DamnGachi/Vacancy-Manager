@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+// import {ImageBackground } from "react-native"
 import "./index.css";
 
 
 const CallbackForm = () => {
     const [email, setEmail] = useState("");
-    const [telegram, setTelegram] = useState("");
+    // const [telegram, setTelegram] = useState("");
     const [firstName, setfirstName] = useState('');
     const [secondName, setsecondName] = useState('');
     const [patronymic, setpatronymic] = useState('');
@@ -33,12 +34,12 @@ const CallbackForm = () => {
 const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/register', {
+    fetch("/.ass.json", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName, secondName, patronymic , telegram, vakancy, value , email }),
+        body: JSON.stringify({ firstName, secondName, patronymic , vakancy, value , email }),
     })
         .then((response) => {
             if (!response.ok) {
@@ -59,7 +60,7 @@ const handleSubmit = (event) => {
         <div className="main">
             <div className="submain">
                 <form onSubmit={handleSubmit}>
-        <h1>Форма регистрации
+        <h1>Форма отправки заявки
                         </h1>
       <div className="input">
         <label htmlFor="email">Электронная почта:</label>
@@ -67,69 +68,75 @@ const handleSubmit = (event) => {
         {!isValidEmail && <span style={{ color: "red" }}>Неправильный формат адреса электронной почты</span>}
                     </div>
 
-    <div className="input">
+    {/* <div className="input">
         <label>
             Ваш Telegram:
+            </label>
             <input
                 type="text"
-                placeholder="@poimanzajopu"
+                placeholder="@yourTG"
                 value={telegram}
                 onChange={(event) => setTelegram(event.target.value)}
             />
-        </label>
-    </div>
+
+    </div> */}
     
       <div className="input">
       <label>
-        Имя пользователя:
+        Введите имя:
+        </label>
         <input
           type="text"
           placeholder="Иван"
+            id = "first_name"
           value={firstName}
           onChange={(event) => setfirstName(event.target.value)}
         />
-      </label>
+
     </div>
 
         <div className="input">
             <label>
-                Фамилия пользователя:
+                Введите фамилию:
+            </label>
                 <input
                     type="text"
                     placeholder="Наумов"
                     value={secondName}
                     onChange={(event) => setsecondName(event.target.value)}
                 />
-            </label>
+
         </div>
 
         <div className="input">
             <label>
-                Отчество пользователя:
+                Введите отчество ( если есть ):
+            </label>
                 <input
                     type="text"
                     placeholder="Николаевич"
                     value={patronymic}
                     onChange={(event) => setpatronymic(event.target.value)}
                 />
-            </label>
+
         </div>
 
-      <div>
-      <label>
+    <div className="input">
+    <label>
         Город:  
+    </label>
           <select value={value} onChange={(event) => setCity(event.target.value)}>
             <option value="1">Санкт-Петербург</option>
             <option value="2">Москва</option>
             <option value="3">Краснодар</option>
             <option value="4">Урюпинск</option>
           </select>
-          </label>
+
           </div>
 
 
 
-          <div>
+        <div className="input">
               <label>
                   Вакансия:
                   <select value={vakancy} onChange={(event) => setVakancy(event.target.value)}>
@@ -142,13 +149,14 @@ const handleSubmit = (event) => {
 
 
 
-          <div>
+    <div className="input">
       <label>
         Загрузить резюме:
         <input
           type="file"
           name="file"
           onChange={(event) => setFile(event.target.value)}
+          title=""
         />
       </label>
       </div>
@@ -157,7 +165,7 @@ const handleSubmit = (event) => {
 
       <button type="submit">Отправить форму</button>
             </form>
-     </div>
+            </div>
 </div>
   );
 };
