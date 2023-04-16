@@ -28,7 +28,7 @@ async def get_all_application(
             status_code=404, detail=f"application not found as {error}")
 
 
-@router.get("/applications/")
+@router.get("/applications/s1")
 async def get_one_application(
     application: ApplicationCreate, session: AsyncSession = Depends(get_session)
 ) -> ApplicationCreate:
